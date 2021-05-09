@@ -17,11 +17,11 @@ Done for the Symbolic Languages course.
     (https://docs.python.org/3.6/library/ctypes.html)
 ## Testy
 1. Wykonanie mnożenia (w Pythonie i przez dll):
-    <img src="img/1.png" style="display: block"/>
+    <div><img src="img/1.png"/></div>
 2. Wykonanie mnożenia (w Pythonie i przez dll):
-    <img src="img/2.png" />
+    <div><img src="img/2.png" /></div>
 3. Wykonanie mnożenia (w Pythonie i przez dll):
-    <img src="img/3.png" />
+    <div><img src="img/3.png" /></div>
 4. Próba wykonania mnożenia macierzy 2x3 przez macierz 1x2 (oczekiwany komunikat o błędzie i możliwość kontynuowania pracy z programem bez ponownego uruchamiania. 
 5. Uzyskanie porównania czasów dla mnożenia macierzy 1x1, 10x10 i 50x50 (odpowiednio 100000, 1000 i 50 powtórzeń, liczby całkowite). 
 6. Uzyskanie porównania czasów dla mnożenia macierzy 200x200 (3 powtórzenia, liczby rzeczywiste). 
