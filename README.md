@@ -17,7 +17,7 @@ Done for the Symbolic Languages course.
     (https://docs.python.org/3.6/library/ctypes.html)
 ## Testy
 1. Wykonanie mnożenia (w Pythonie i przez dll):
-    <img src="img/1.png" />
+    <img src="img/1.png" style="display: block"/>
 2. Wykonanie mnożenia (w Pythonie i przez dll):
     <img src="img/2.png" />
 3. Wykonanie mnożenia (w Pythonie i przez dll):
