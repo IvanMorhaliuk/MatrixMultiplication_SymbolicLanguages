@@ -4,6 +4,7 @@ import tkinter.ttk as ttk
 root = tk.Tk()
 root.title("Matrix Multiplication")
 root.geometry('800x600')
+root.minsize(width=500,height=550)
 #root.minsize(width=800, height=500)
 
 
@@ -54,21 +55,21 @@ for item in (spinBoxesM1,spinBoxesM2):
     ttk.Label(panesFrames[i],text='To:').pack()
     item[3].pack()
     i+=1
-
-types = ttk.Combobox(panes,values=('integer','double'),state='readonly')
-types.current(0)
-mode = ttk.Combobox(panes,values=('default','hand'),state='readonly')
-mode.current(0)
-
-check = ttk.Checkbutton(panes,text="Strict")
-
 for i in range(2):
     panes.add(panesFrames[i])
-panes.add(ttk.Label(panes,text='Type:'))
-panes.add(types)
-panes.add(ttk.Label(panes,text='Mode:'))
-panes.add(mode)
-panes.add(check)
+
+types = ttk.Combobox(configsFrame,values=('integer','double'),state='readonly')
+types.current(0)
+mode = ttk.Combobox(configsFrame,values=('default','hand'),state='readonly')
+mode.current(0)
+
+checkVal = tk.BooleanVar(value=False)
+check = ttk.Checkbutton(configsFrame,text="Strict",variable=checkVal)
+typeLabel = ttk.Label(configsFrame,text='Type:')
+modeLabel = ttk.Label(configsFrame,text='Mode:')
+button = ttk.Button(configsFrame,text="Run Calculations")
+
+
 
 #Styles
 for i in (body,matrixesFrame,logsFrame):
@@ -103,7 +104,10 @@ text.grid(column=0,row=0,columnspan=2,sticky='ew')
 
 configsFrame.grid(column=2,row=1,rowspan=2,sticky="ns")
 panes.grid(column=0,row=0)
-
-
-
+typeLabel.grid()
+types.grid()
+modeLabel.grid()
+mode.grid()
+check.grid(sticky="e")
+button.grid(sticky="w")
 root.mainloop()
