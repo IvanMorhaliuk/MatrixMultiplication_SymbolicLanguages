@@ -17,19 +17,22 @@ configsFrame = ttk.Frame(body)
 
 
 #matrixesFrame elements
-matrixes = ttk.Notebook(matrixesFrame)
-matrix1 = ttk.Frame(matrixes)
-matrix2 = ttk.Frame(matrixes)
-resultMatrix = ttk.Frame(matrixes)
-matrixes.add(matrix1,text='matrix1')
-matrixes.add(matrix2,text='matrix2')
-matrixes.add(resultMatrix,text='resultMatrix')
+matrixesNotebook = ttk.Notebook(matrixesFrame)
 
-matrix1text = tk.Text(matrix1,wrap="none")
-matrix1Yscroll = ttk.Scrollbar(matrix1,orient="vertical",command=matrix1text.yview)
-matrix1Xscroll = ttk.Scrollbar(matrix1,orient="horizontal",command=matrix1text.xview)
-matrix1text['yscrollcommand']=matrix1Yscroll.set
-matrix1text['xscrollcommand']=matrix1Xscroll.set
+matrixes = [ ttk.Frame(matrixesNotebook) for i in range(3)]
+for i in range(2):
+    matrixesNotebook.add(matrixes[i],text='matrix'+str(i+1))
+matrixesNotebook.add(matrixes[2],text='result matrix')
+
+matrixesTexts = [ tk.Text(matrixes[i],wrap="none",state='disabled') for i in range(3)]
+
+matrixesXscrolls = [ ttk.Scrollbar(matrixes[i],orient="horizontal",command=matrixesTexts[i].xview) for i in range(3)]
+matrixesYscrolls = [ ttk.Scrollbar(matrixes[i],orient="vertical",command=matrixesTexts[i].yview) for i in range(3)]
+
+for i in range(3):
+    matrixesTexts[i]['yscrollcommand'] = matrixesYscrolls[i].set
+    matrixesTexts[i]['xscrollcommand'] = matrixesXscrolls[i].set
+
 
 #logsFrame elements
 text = tk.Text(logsFrame,height=7)
@@ -47,7 +50,7 @@ body['padding'] = 15
 
 matrixesFrame['padding'] = 15
 matrixesFrameStyle = ttk.Style().configure('matrixesFrame.TFrame',background='red',borderwidth=5,relief='solid')
-matrix1text['state'] = 'disabled'
+
 
 logsFrame['padding'] = 15
 logsFrameStyle = ttk.Style().configure('logsFrame.TFrame',background='blue',borderwidth=5,relief='solid')
@@ -72,8 +75,11 @@ body.rowconfigure(1, weight=1)
 
 matrixesFrame.columnconfigure(1, weight=1)
 matrixesFrame.rowconfigure(1, weight=1)
-matrix1.columnconfigure(1, weight=1)
-matrix1.rowconfigure(1, weight=1)
+
+for i in range(3):
+    matrixes[i].columnconfigure(1,weight=1)
+    matrixes[i].rowconfigure(1,weight=1)
+
 
 logsFrame.columnconfigure(1, weight=1)
 logsFrame.rowconfigure(1, weight=1)
@@ -82,11 +88,13 @@ logsFrame.rowconfigure(1, weight=1)
 body.grid(column=0,row=0,columnspan=2,rowspan=2,sticky="nsew")
 
 matrixesFrame.grid(column=0,row=0,columnspan=2,rowspan=2,sticky="nsew")
-matrixes.grid(column=0,row=0,columnspan=2,rowspan=2,sticky='nsew')
-matrix1text.grid(column=0,row=0,columnspan=2,rowspan=2,sticky='nsew')
-matrix1Yscroll.grid(column=1,row=0,rowspan=2,sticky="nse")
-matrix1Xscroll.grid(column=1,row=0,rowspan=2,sticky="sew")
+matrixesNotebook.grid(column=0,row=0,columnspan=2,rowspan=2,sticky='nsew')
 
+for i in range(3):
+    matrixesTexts[i].grid(column=0,row=0,columnspan=2,rowspan=2,sticky='nsew')
+for i in range(3):
+    matrixesYscrolls[i].grid(column=1,row=0,rowspan=2,sticky="nse")
+    matrixesXscrolls[i].grid(column=0,row=1,columnspan=2,sticky="sew")
 
 logsFrame.grid(column=0,row=2,columnspan=2,sticky="ew")
 text.grid(column=0,row=0,columnspan=2,sticky='ew')
