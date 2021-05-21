@@ -3,7 +3,7 @@ import tkinter.ttk as ttk
 
 root = tk.Tk()
 root.title("Matrix Multiplication")
-root.geometry('800x500')
+root.geometry('800x600')
 #root.minsize(width=800, height=500)
 
 
@@ -35,54 +35,56 @@ for i in range(3):
 
 
 #logsFrame elements
-text = tk.Text(logsFrame,height=7)
+text = tk.Text(logsFrame,height=7,state='disabled')
 
 #configFrame elements
 panes = ttk.PanedWindow(configsFrame)
-matrix1Label = ttk.LabelFrame(panes,text="matrix1",width=100,height=100)
-matrix2Label = ttk.LabelFrame(panes,text="matrix2",width=100,height=100)
-panes.add(matrix1Label)
-panes.add(matrix2Label)
+
+panesFrames = [ ttk.LabelFrame(panes,text="matrix " + str(i+1),width=100,height=100) for i in range(2)]
+spinBoxesM1 = [ttk.Spinbox(panesFrames[0],from_=1,to=2000,textvariable=tk.StringVar()) for i in range(4)]
+spinBoxesM2 = [ttk.Spinbox(panesFrames[1],from_=1,to=2000,textvariable=tk.StringVar()) for i in range(4)]
+i=0
+for item in (spinBoxesM1,spinBoxesM2):
+    ttk.Label(panesFrames[i],text='Columns:').pack()
+    item[0].pack()
+    ttk.Label(panesFrames[i],text='Rows:').pack()
+    item[1].pack()
+    ttk.Label(panesFrames[i],text='From:').pack()
+    item[2].pack()
+    ttk.Label(panesFrames[i],text='To:').pack()
+    item[3].pack()
+    i+=1
+
+types = ttk.Combobox(panes,values=('integer','double'),state='readonly')
+types.current(0)
+mode = ttk.Combobox(panes,values=('default','hand'),state='readonly')
+mode.current(0)
+
+check = ttk.Checkbutton(panes,text="Strict")
+
+for i in range(2):
+    panes.add(panesFrames[i])
+panes.add(ttk.Label(panes,text='Type:'))
+panes.add(types)
+panes.add(ttk.Label(panes,text='Mode:'))
+panes.add(mode)
+panes.add(check)
 
 #Styles
-body['padding'] = 15
-
-
-matrixesFrame['padding'] = 15
-matrixesFrameStyle = ttk.Style().configure('matrixesFrame.TFrame',background='red',borderwidth=5,relief='solid')
-
-
-logsFrame['padding'] = 15
-logsFrameStyle = ttk.Style().configure('logsFrame.TFrame',background='blue',borderwidth=5,relief='solid')
-text['state'] = 'disabled'
-
+for i in (body,matrixesFrame,logsFrame):
+    i['padding'] = 15
 configsFrame['padding'] = 20
-configsFrameStyle = ttk.Style().configure('configsFrame.TFrame',background='orange',borderwidth=5,relief='solid')
-
-
-
-
-
-
-
 
 #configures
-root.columnconfigure(1, weight=1)
-root.rowconfigure(1, weight=1)
+for i in (root,body,matrixesFrame,logsFrame):
+    i.columnconfigure(1, weight=1)
+    i.rowconfigure(1, weight=1)
 
-body.columnconfigure(1, weight=1)
-body.rowconfigure(1, weight=1)
-
-matrixesFrame.columnconfigure(1, weight=1)
-matrixesFrame.rowconfigure(1, weight=1)
 
 for i in range(3):
     matrixes[i].columnconfigure(1,weight=1)
     matrixes[i].rowconfigure(1,weight=1)
 
-
-logsFrame.columnconfigure(1, weight=1)
-logsFrame.rowconfigure(1, weight=1)
 
 #grid
 body.grid(column=0,row=0,columnspan=2,rowspan=2,sticky="nsew")
