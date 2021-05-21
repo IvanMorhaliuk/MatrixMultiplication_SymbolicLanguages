@@ -62,12 +62,12 @@ configsFrameStyle = ttk.Style().configure('configsFrame.TFrame',background='oran
 #grid
 body.grid(column=0,row=0,columnspan=2,rowspan=2,sticky="nsew")
 
-matrixesFrame.grid(column=0,row=0,sticky="nsew")
+matrixesFrame.grid(column=0,row=0,columnspan=2,rowspan=2,sticky="nsew")
 matrixes.grid(column=0,row=0)
 
-logsFrame.grid(column=0,row=1,sticky="sew")
+logsFrame.grid(column=0,row=2,columnspan=2,sticky="ew")
 
-configsFrame.grid(column=1,row=0,rowspan=2,sticky="nse")
+configsFrame.grid(column=2,row=1,rowspan=2,sticky="ns")
 panes.grid(column=0,row=0)
 
 
