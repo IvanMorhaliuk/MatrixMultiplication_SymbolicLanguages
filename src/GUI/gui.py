@@ -1,10 +1,23 @@
 import tkinter as tk
 import tkinter.ttk as ttk
 
-    
-    
+def changeSpin1():
+    cols = int(m1HandSpinParam[0].get())
+    rows = int(m1HandSpinParam[1].get())
+    for i in handMatrix1:
+        for j in i:
+            j.grid_remove()
+    handMatrix1.clear()
+    for i in range(rows):
+        handMatrix1.append([ ttk.Entry(handMatrix1Frame,width=7) for j in range(cols)])
+    for i in range(rows):
+        for j in range(cols):
+            handMatrix1[i][j].grid(row=i,column=j)
 def changeMode(event):
     if mode.get() == "default":
+        handMatrix1Label.place_forget()
+        handMatrix2Label.place_forget()
+        handMatrix1Frame.place_forget()
         matrixesNotebook.place(relheight=1.0,relwidth=1.0)
         for i in range(2):
             m1HandSpinParam[i].grid_remove()
@@ -20,7 +33,12 @@ def changeMode(event):
         for i in range(2):
             m1HandSpinParam[i].grid(column=i,row=1)
             m2HandSpinParam[i].grid(column=i,row=1)
-
+        handMatrix1Label.place(x=0,y=0)
+        handMatrix1Frame.place(x=0,rely=0.05)
+        for i in range(3):
+            for j in range(3):
+                handMatrix1[i][j].grid(row=i,column=j)
+        handMatrix2Label.place(x=0,rely=0.2)
 root = tk.Tk()
 root.title("Matrix Multiplication")
 root.geometry('800x600')
@@ -57,6 +75,9 @@ for i in range(3):
 handMatrix1Label = ttk.Label(matrixesFrame,text="Matrix1")
 handMatrix1Frame = ttk.Frame(matrixesFrame)
 handMatrix1 = []
+for i in range(3):
+        handMatrix1.append([ ttk.Entry(handMatrix1Frame,width=7) for j in range(3)])
+
 handMatrix2Label = ttk.Label(matrixesFrame,text="Matrix2")
 handMatrix2Frame = ttk.Frame(matrixesFrame)
 handMatrix2 = []
@@ -74,8 +95,12 @@ panesFrames = [ ttk.LabelFrame(panes,text="matrix " + str(i+1),width=100,height=
 m1ParamLabels = [ttk.Label(panesFrames[0],text="Cols"),ttk.Label(panesFrames[0],text="Rows")]
 m1RangeLabels = [ttk.Label(panesFrames[0],text="From:"),ttk.Label(panesFrames[0],text="To:")]
 m1SpinParam = [ttk.Spinbox(panesFrames[0],from_=1,to=2000,width=4) for i in range(2)]
-m1HandSpinParam = [ttk.Spinbox(panesFrames[0],from_=1,to=3,state='readonly',width=4) for i in range(2)]
+m1HandSpinParamVal = [tk.StringVar(),tk.StringVar()]
+m1HandSpinParam = [ttk.Spinbox(panesFrames[0],from_=1,to=3,state='readonly',width=4,textvariable=m1HandSpinParamVal[i],command=changeSpin1) for i in range(2)]
 m1SpinRange = [ttk.Spinbox(panesFrames[0],from_=1,to=2000,width=4) for i in range(2)]
+
+for i in m1HandSpinParamVal:
+    i.set("3")
 
 m2ParamLabels = [ttk.Label(panesFrames[1],text="Cols"),ttk.Label(panesFrames[1],text="Rows")]
 m2RangeLabels = [ttk.Label(panesFrames[1],text="From:"),ttk.Label(panesFrames[1],text="To:")]
@@ -122,6 +147,8 @@ matrixesFrame.place(relheight=0.8,relwidth=0.7)
 matrixesNotebook.place(relheight=1.0,relwidth=1.0)
 for i in matrixesTexts:
     i.place(relheight=1.0,relwidth=1.0)
+
+
 
 logsFrame.place(rely=0.8,relheight=0.2,relwidth=0.8)
 
