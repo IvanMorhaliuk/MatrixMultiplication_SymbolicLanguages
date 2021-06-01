@@ -1,5 +1,5 @@
 from matrixes.MnozenieMacierzy import MnozenieMacierzy
-
+import random
 class MnozenieMacierzyPython(MnozenieMacierzy):
     cols = 0
     rows = 0
@@ -16,11 +16,19 @@ class MnozenieMacierzyPython(MnozenieMacierzy):
                 print(self.matrix[i][j], end = ' ')
             print()
     
-    def readFromEntries(self,oMatrix):
+    def readFromEntries(self,oMatrix,func):
         for i in range(self.rows):
             for j in range(self.cols):
-                self.matrix[i][j] = int(oMatrix[i][j].get())
-    
+                self.matrix[i][j] = 0 if (oMatrix[i][j].get() == '' ) else func(oMatrix[i][j].get())
+    def fillMatrix(self, rangeFrom, rangeTo, isInteger):
+        if isInteger == True:
+            for i in range(self.rows):
+                for j in range(self.cols):
+                    self.matrix[i][j] = random.randint(rangeFrom,rangeTo)
+        else:
+            for i in range(self.rows):
+                for j in range(self.cols):
+                    self.matrix[i][j] = random.uniform(rangeFrom,rangeTo)
     def ifMultipliable(self,other):
         if (self.cols == other.rows):
             return True
@@ -32,7 +40,7 @@ class MnozenieMacierzyPython(MnozenieMacierzy):
             summa += m1.matrix[row][i] * m2.matrix[i][col]
         return summa
     @staticmethod
-    def multiplicatePython(m1,m2):
+    def mnoz(m1,m2):
         m3 = MnozenieMacierzyPython(m2.cols,m1.rows)
         for i in range(m3.rows):
             for j in range(m3.cols):

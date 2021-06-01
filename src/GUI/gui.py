@@ -151,7 +151,7 @@ class GUI:
             for j in range(3):
                 self.handMatrix1Vals[i][j].set("0")
                 self.handMatrix2Vals[i][j].set("0")
-
+        
 
 
         self.handMatrix3Frame = ttk.Frame(self.matrixesFrame)
@@ -218,9 +218,14 @@ class GUI:
         self.body.place(relheight=1.0,relwidth=1.0)
 
         self.matrixesFrame.place(relheight=0.8,relwidth=0.8)
+
         self.matrixesNotebook.place(relheight=1.0,relwidth=1.0)
         for i in self.matrixesTexts:
-            i.place(relheight=1.0,relwidth=1.0)
+            i.place(relheight=1.0,relwidth=0.97)
+
+        
+            
+            
 
 
 

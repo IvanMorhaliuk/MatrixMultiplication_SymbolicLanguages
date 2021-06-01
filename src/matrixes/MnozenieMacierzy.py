@@ -6,11 +6,12 @@ class MnozenieMacierzy:
     def ifMultipliable(self,other):
         pass
     
-    def readFromEntries(self,oMatrix):
+    def readFromEntries(self,oMatrix,func):
         pass
-    
+    def fillMatrix(self,rangeFrom,rangeTo,isInteger):
+        pass
     def printMatrix(self):
         pass
-    
-    def mnoz(self):
+    @staticmethod
+    def mnoz(m1,m2):
         pass
