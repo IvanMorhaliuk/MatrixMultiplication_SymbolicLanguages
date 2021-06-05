@@ -36,17 +36,16 @@ class MnozenieMacierzyCpp(MnozenieMacierzy):
                 print(self.arg1[i][j],end=' ')
             print()
     @staticmethod
-    def computeInC(m1,m2,m3,m3rows,m3cols,m1cols,isInteger):
-        """ lib = windll.LoadLibrary("src/dlls/mydll.dll")
-        lib.sum.argtypes = [type(self.arg1),c_int,c_int]
-        lib.sum.restype = c_float
-        print(lib.sum(self.arg1,self.rows, self.cols)) """
-
-
-        """ lib = windll.LoadLibrary("src/dlls/mydll.dll")
-        lib.float_summa.argtypes = [type(m1),type(m2),c_int,c_int,c_int]
-        lib.float_summa.restype = c_float
-        print(lib.float_summa(m1,m2, 1, 2,3)) """
+    def areEqual(m1,m2):
+        if m1.rows != m2.rows or m1.cols != m2.cols:
+            return False
+        for i in range(m1.rows):
+            for j in range(m1.cols):
+                if m1.arg1[i][j] != m2.arg1[i][j]:
+                    return False
+        return True
+    @staticmethod
+    def mnoz(m1,m2,m3,m3rows,m3cols,m1cols,isInteger):
 
         lib = windll.LoadLibrary("src/dlls/mydll.dll")
         if isInteger==False: 

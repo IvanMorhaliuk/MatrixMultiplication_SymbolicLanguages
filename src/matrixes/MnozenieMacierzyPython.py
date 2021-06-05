@@ -32,6 +32,7 @@ class MnozenieMacierzyPython(MnozenieMacierzy):
     def ifMultipliable(self,other):
         if (self.cols == other.rows):
             return True
+        raise Exception("Wrong dimentions!")
         return False
     @staticmethod
     def summ(m1,m2,row,col,n):

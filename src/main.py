@@ -3,7 +3,6 @@ from tkinter import messagebox
 from matrixes.MnozenieMacierzyPython import *
 from matrixes.MnozenieMacierzyCpp import *
 from datetime import datetime
-from platform import python_version
 import timeit
 
 def printToLogFrame(screenText,timePy,convertTime,timeC,numOfrepeats=1):
@@ -44,8 +43,7 @@ def Run(event):
             m1.readFromEntries(mainWindow.handMatrix1,float)
             m2.readFromEntries(mainWindow.handMatrix2,float)
         try:
-            if (not m1.ifMultipliable(m2)):
-                raise Exception("Wrong dimentions!")  
+            m1.ifMultipliable(m2)
         except Exception as e:
             messagebox.showerror(message=e)
         else:
@@ -62,7 +60,7 @@ def Run(event):
                 convertTimeEnd = timeit.timeit()
                 for i in range(numOfRepeats):
                     cTimeStart = timeit.timeit()
-                    MnozenieMacierzyCpp.computeInC(m1C.arg1,m2C.arg1,m3C.arg1,m3C.rows,m3C.cols,m1C.cols,True)
+                    MnozenieMacierzyCpp.mnoz(m1C.arg1,m2C.arg1,m3C.arg1,m3C.rows,m3C.cols,m1C.cols,True)
                     cTimeEnd = timeit.timeit()
                     timeStart = timeit.timeit()
                     m3 = MnozenieMacierzyPython.mnoz(m1,m2)
@@ -75,7 +73,7 @@ def Run(event):
                 convertTimeEnd = timeit.timeit()
                 for i in range(numOfRepeats):
                     cTimeStart = timeit.timeit()
-                    MnozenieMacierzyCpp.computeInC(m1C.arg1,m2C.arg1,m3C.arg1,m3C.rows,m3C.cols,m1C.cols,False)
+                    MnozenieMacierzyCpp.mnoz(m1C.arg1,m2C.arg1,m3C.arg1,m3C.rows,m3C.cols,m1C.cols,False)
                     cTimeEnd = timeit.timeit()
                     timeStart = timeit.timeit()
                     m3 = MnozenieMacierzyPython.mnoz(m1,m2)
@@ -119,7 +117,7 @@ def Run(event):
                 convertTimeEnd = timeit.timeit()
                 for i in range(numOfRepeats):
                     cTimeStart = timeit.timeit()
-                    MnozenieMacierzyCpp.computeInC(m1C.arg1,m2C.arg1,m3C.arg1,m3C.rows,m3C.cols,m1C.cols,True)
+                    MnozenieMacierzyCpp.mnoz(m1C.arg1,m2C.arg1,m3C.arg1,m3C.rows,m3C.cols,m1C.cols,True)
                     cTimeEnd = timeit.timeit()
                     timeStart = timeit.timeit()
                     m3 = MnozenieMacierzyPython.mnoz(m1,m2)
@@ -134,7 +132,7 @@ def Run(event):
                 convertTimeEnd = timeit.timeit()
                 for i in range(numOfRepeats):
                     cTimeStart = timeit.timeit()
-                    MnozenieMacierzyCpp.computeInC(m1C.arg1,m2C.arg1,m3C.arg1,m3C.rows,m3C.cols,m1C.cols,False)
+                    MnozenieMacierzyCpp.mnoz(m1C.arg1,m2C.arg1,m3C.arg1,m3C.rows,m3C.cols,m1C.cols,False)
                     cTimeEnd = timeit.timeit()
                     timeStart = timeit.timeit()
                     m3 = MnozenieMacierzyPython.mnoz(m1,m2)
