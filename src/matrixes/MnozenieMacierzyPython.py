@@ -19,7 +19,7 @@ class MnozenieMacierzyPython(MnozenieMacierzy):
     def readFromEntries(self,oMatrix,func):
         for i in range(self.rows):
             for j in range(self.cols):
-                self.matrix[i][j] = 0 if (oMatrix[i][j].get() == '' ) else func(oMatrix[i][j].get())
+                self.matrix[i][j] = 0 if (oMatrix[i][j].get() in ['','+','-'] ) else func(oMatrix[i][j].get())
     def fillMatrix(self, rangeFrom, rangeTo, isInteger):
         if isInteger == True:
             for i in range(self.rows):

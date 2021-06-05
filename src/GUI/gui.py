@@ -15,7 +15,7 @@ class GUI:
         self.logsFrame = ttk.Frame(self.body)
         self.configsFrame = ttk.Frame(self.body)
         self.checkNumWrapper = (self.root.register(self.checkNum),'%P')
-        self.checkNumWrapperT = (self.root.register(self.checkNum),'%P')
+        self.checkNumWrapperT = (self.root.register(self.checkNum2),'%P')
         self.createMatrixesFrameElems()
         self.createLogsFrameElems()
         self.createConfigFrameElems()
@@ -168,7 +168,7 @@ class GUI:
 
         self.m1ParamLabels = [ttk.Label(self.panesFrames[0],text="Cols"),ttk.Label(self.panesFrames[0],text="Rows")]
         self.m1RangeLabels = [ttk.Label(self.panesFrames[0],text="From:"),ttk.Label(self.panesFrames[0],text="To:")]
-        self.m1SpinParam = [ttk.Spinbox(self.panesFrames[0],from_=1,to=2000,validate="key",validatecommand=self.checkNumWrapperT,width=4) for i in range(2)]
+        self.m1SpinParam = [ttk.Spinbox(self.panesFrames[0],from_=1,to=2000,validate="key",validatecommand=self.checkNumWrapper,width=4) for i in range(2)]
         self.m1HandSpinParamVal = [tk.StringVar(),tk.StringVar()]
         self.m1HandSpinParam = [ttk.Spinbox(self.panesFrames[0],from_=1,to=3,state='readonly',width=4,textvariable=self.m1HandSpinParamVal[i],command=lambda : self.changeSpin(self.m1HandSpinParam,self.handMatrix1,self.handMatrix1Frame,self.handMatrix1Vals)) for i in range(2)]
         self.m1SpinRange = [ttk.Spinbox(self.panesFrames[0],from_=1,to=2000,validate="key",validatecommand=self.checkNumWrapperT,width=4) for i in range(2)]
@@ -178,7 +178,7 @@ class GUI:
 
         self.m2ParamLabels = [ttk.Label(self.panesFrames[1],text="Cols"),ttk.Label(self.panesFrames[1],text="Rows")]
         self.m2RangeLabels = [ttk.Label(self.panesFrames[1],text="From:"),ttk.Label(self.panesFrames[1],text="To:")]
-        self.m2SpinParam = [ttk.Spinbox(self.panesFrames[1],from_=1,to=2000,validate="key",validatecommand=self.checkNumWrapperT,width=4) for i in range(2)]
+        self.m2SpinParam = [ttk.Spinbox(self.panesFrames[1],from_=1,to=2000,validate="key",validatecommand=self.checkNumWrapper,width=4) for i in range(2)]
         self.m2HandSpinParamVal = [tk.StringVar(),tk.StringVar()]
         self.m2HandSpinParam = [ttk.Spinbox(self.panesFrames[1],from_=1,to=3,state='readonly',width=4,textvariable=self.m2HandSpinParamVal[i],command=lambda : self.changeSpin(self.m2HandSpinParam,self.handMatrix2,self.handMatrix2Frame,self.handMatrix2Vals)) for i in range(2)]
         self.m2SpinRange = [ttk.Spinbox(self.panesFrames[1],from_=1,to=2000,validate="key",validatecommand=self.checkNumWrapperT,width=4) for i in range(2)]
@@ -206,7 +206,10 @@ class GUI:
         self.mode.current(0)
         self.mode.bind("<<ComboboxSelected>>",self.changeMode)
 
-
+        self.repeatsLabel = ttk.Label(self.configsFrame,text='Repeats:')
+        self.repeats = ttk.Spinbox(self.configsFrame,from_=1,to=2000,validate="key",validatecommand=self.checkNumWrapper,width=4)
+        self.repeats.set("0")
+        
         self.button = ttk.Button(self.configsFrame,text="Run Calculations")
 
     def styles(self):
@@ -249,6 +252,7 @@ class GUI:
         self.mode.pack(pady="5")
         self.typeLabel.pack(pady="5")
         self.types.pack(pady="5")
+        self.repeats.pack(pady="5")
         self.button.pack(pady="5")
 
         self.root.mainloop()
