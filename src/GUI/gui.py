@@ -184,8 +184,8 @@ class GUI:
         self.m2SpinRange = [ttk.Spinbox(self.panesFrames[1],from_=1,to=2000,validate="key",validatecommand=self.checkNumWrapperT,width=4) for i in range(2)]
 
         for i in range(2):
-            self.m1SpinParam[i].set("0")
-            self.m2SpinParam[i].set("0")
+            self.m1SpinParam[i].set("1")
+            self.m2SpinParam[i].set("1")
             self.m1SpinRange[i].set("0")
             self.m2SpinRange[i].set("0")
 
@@ -197,7 +197,7 @@ class GUI:
 
 
         self.typeLabel = ttk.Label(self.configsFrame,text='Type:')
-        self.types = ttk.Combobox(self.configsFrame,values=('integer','double'),state='readonly')
+        self.types = ttk.Combobox(self.configsFrame,values=('integer','float'),state='readonly')
         self.types.current(0)
         self.types.bind("<<ComboboxSelected>>",self.changeType)
 

@@ -32,7 +32,7 @@ def printMatrix(screenText,matrix):
     screenText.configure(state="disabled")
 
 def Run(event):
-    numOfRepeats = 1 if (mainWindow.repeats.get() in ['','+','-','0'] ) else int(mainWindow.repeats.get())
+    numOfRepeats = 1 if (mainWindow.repeats.get() in ['','+','-','0'] or int(mainWindow.repeats.get()) <=0 ) else int(mainWindow.repeats.get())
     if (mainWindow.mode.get() == "hand"):
         m1 = MnozenieMacierzyPython(int(mainWindow.m1HandSpinParam[0].get()),int(mainWindow.m1HandSpinParam[1].get()))
         m2 = MnozenieMacierzyPython(int(mainWindow.m2HandSpinParam[0].get()),int(mainWindow.m2HandSpinParam[1].get()))
@@ -98,7 +98,12 @@ def Run(event):
                 m2From = float(mainWindow.m2SpinRange[0].get())
                 m2To = float(mainWindow.m2SpinRange[1].get())
             if (not m1.ifMultipliable(m2)):
-                raise Exception("Wrong dimentions!")  
+                raise Exception("Wrong dimentions!")
+            if (m1.cols <= 0
+            or m1.rows <= 0
+            or m2.cols <= 0
+            or m2.rows <= 0 ):
+                raise ValueError  
         except ValueError as e:
             messagebox.showerror(message="Wrong input!")   
         except Exception as e:
