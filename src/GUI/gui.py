@@ -208,8 +208,8 @@ class GUI:
 
         self.repeatsLabel = ttk.Label(self.configsFrame,text='Repeats:')
         self.repeats = ttk.Spinbox(self.configsFrame,from_=1,to=2000,validate="key",validatecommand=self.checkNumWrapper,width=4)
-        self.repeats.set("0")
-        
+        self.repeats.set("1")
+
         self.button = ttk.Button(self.configsFrame,text="Run Calculations")
 
     def styles(self):
