@@ -43,7 +43,7 @@ class GUI:
                 handMatrix[i][j].grid(row=i,column=j)
     @staticmethod
     def checkNum(newval):
-        return re.match('^[+-]?[0-9]*$',newval) is not None and len(newval) <= 5
+        return re.match('^[+-]?[0-9]*$',newval) is not None and len(newval) <= 7
     @staticmethod
     def checkNum2(newval):
         return re.match('^[+-]?([0-9]*[.])?[0-9]*$',newval) is not None and len(newval) <= 6
@@ -207,7 +207,7 @@ class GUI:
         self.mode.bind("<<ComboboxSelected>>",self.changeMode)
 
         self.repeatsLabel = ttk.Label(self.configsFrame,text='Repeats:')
-        self.repeats = ttk.Spinbox(self.configsFrame,from_=1,to=2000,validate="key",validatecommand=self.checkNumWrapper,width=4)
+        self.repeats = ttk.Spinbox(self.configsFrame,validate="key",validatecommand=self.checkNumWrapper,width=10)
         self.repeats.set("1")
 
         self.button = ttk.Button(self.configsFrame,text="Run Calculations")
